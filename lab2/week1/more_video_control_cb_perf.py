@@ -2,7 +2,7 @@
 # Hongliang Si & Jim Connelly
 # hs983 & jpc324 (@cornell.edu)
 # 2/11/2019 (Monday's Lab)
-# video_control.py
+# more_video_control_cb_perf.py
 # python code to control video playback by GPIO pins and FIFO.
 # Added callback functions. For performance test with perfself.
 #********************************************************
