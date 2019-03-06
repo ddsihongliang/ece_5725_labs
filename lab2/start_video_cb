@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Running: python t0.py &"
+python /home/pi/lab2/more_video_control_cb.py &
+
+
+sudo SDL_VIDEODRIVER=fbcon SDL_FBDEV=/dev/fb1 mplayer -vo sdl -input file=/home/pi/lab2/video_fifo /home/pi/lab2/bigbuckbunny320p.mp4 
+
+
