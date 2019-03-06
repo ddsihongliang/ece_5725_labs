@@ -1,11 +1,11 @@
-#**************************************
+#***********************************************************
 # Hongliang Si & Jim Connelly
 # hs983 & jpc324 (@cornell.edu)
 # 2/11/2019 (Monday's Lab)
 # video_control.py
-# python code to control video playback
-# by GPIO pins and FIFO
-#**************************************
+# python code to control video playback by GPIO pins and FIFO.
+# Added callback functions. For performance test with perfself.
+#********************************************************
 import RPi.GPIO as GPIO
 import time
 import subprocess
@@ -26,11 +26,11 @@ def GPIO5_callback(channel):
     print("GPIO 5 Callback function")
     cmd_line = 'echo "seek -30" > /home/pi/lab2/video_fifo'
     print subprocess.check_output(cmd_line, shell=True)
-            
+
 def GPIO6_callback(channel):
     print("GPIO 6 Callback function")
     cmd_line = 'echo "seek 30" > /home/pi/lab2/video_fifo'
-    print subprocess.check_output(cmd_line, shell=True)   
+    print subprocess.check_output(cmd_line, shell=True)
 
 def GPIO17_callback(channel):
     print("GPIO 17 Callback function")
@@ -41,12 +41,12 @@ def GPIO22_callback(channel):
     print("GPIO 22 Callback function")
     cmd_line = 'echo "seek -10" > /home/pi/lab2/video_fifo'
     print subprocess.check_output(cmd_line, shell=True)
-    
+
 def GPIO23_callback(channel):
     print("GPIO 23 Callback function")
     cmd_line = 'echo "p" > /home/pi/lab2/video_fifo'
     print subprocess.check_output(cmd_line, shell=True)
-    
+
 def GPIO27_callback(channel):
     print("GPIO 27 Callback function")
     cmd_line = 'echo "q" > /home/pi/lab2/video_fifo'
@@ -63,10 +63,11 @@ GPIO.add_event_detect(27, GPIO.RISING, callback=GPIO27_callback)
 
 cmd_line = ""
 run = True
-while run:
-    try:
-        time.sleep(.3)
-    except KeyboardInterrupt:
-        GPIO.cleanup()
-GPIO.cleanup()
+t_end = time.time() + 10
+while run and (time.time() < t_end):
 
+    #~ try:
+    time.sleep(0)
+    #~ except KeyboardInterrupt:
+        #~ GPIO.cleanup()
+GPIO.cleanup()
