@@ -57,7 +57,7 @@ run = 1
 speed_multi = 1
 while run:
     sleep(0.02)
-    if ( not GPIO.input(27) ): # Bail_out 
+    if ( not GPIO.input(27) ): # Bail_out
         run = 0
 
     for event in pygame.event.get():

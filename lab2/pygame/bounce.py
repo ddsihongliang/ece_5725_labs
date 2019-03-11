@@ -1,9 +1,16 @@
+#***********************************************************
+# Hongliang Si & Jim Connelly
+# hs983 & jpc324 (@cornell.edu)
+# 2/11/2019 (Monday's Lab)
+# bounce.py
+# python code to play animation of one bouncing balls
+#********************************************************
 import pygame # Import pygame graphics library
 import os # for OS calls
 from time import sleep
 
 # os.putenv('SDL_VIDEODRIVER', 'fbcon') # Display on piTFT
-# os.putenv('SDL_FBDEV', '/dev/fb0') 
+# os.putenv('SDL_FBDEV', '/dev/fb0')
 
 pygame.init()
 

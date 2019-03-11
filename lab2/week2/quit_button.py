@@ -4,7 +4,7 @@
 # 2/27/2019 (Monday's Lab)
 # quit_button.py
 
-# python code to t displays a single ‘quit’ button on the
+# python code to displays a single ‘quit’ button on the
 # lower edge of the screen
 #**************************************
 
