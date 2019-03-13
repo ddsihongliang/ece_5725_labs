@@ -13,7 +13,7 @@ import RPi.GPIO as GPIO
 import time
 
 os.putenv('SDL_VIDEODRIVER', 'fbcon') # Display on piTFT
-os.putenv('SDL_FBDEV', '/dev/fb1') 
+os.putenv('SDL_FBDEV', '/dev/fb1')
 os.putenv('SDL_MOUSEDRV', 'TSLIB') # Track mouse clicks on piTFT
 os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
 
@@ -37,7 +37,7 @@ def func_stop():
     moveTerms(right)
     right[0] = 'Stop'
     right[1] = int(time.time() - timeVal)
-    
+
     # left stop
     changeServo (0, 0)
     moveTerms(left)
@@ -78,72 +78,71 @@ def moveTerms(array):
 	array[4] = array[2]
 	array[3] = array[1]
 	array[2] = array[0]
-	
+
 def color(presssed):
     if (presssed==-1):
         return GREEN
     if (presssed==0):
 	return RED
-	
+
 def print_button(presssed):
-    screen.fill(BLACK) # Erase the Work space 
+    screen.fill(BLACK) # Erase the Work space
     pygame.draw.circle(screen,color(presssed),(160,120),40)
     if(presssed == 0):
         for my_text, text_pos in STOP_button.items():
 	    text_surface = my_font.render(my_text, True, WHITE)
 	    rect = text_surface.get_rect(center=text_pos)
 	    screen.blit(text_surface, rect)
-    
+
     elif(presssed==-1):
 	for my_text, text_pos in RESUME_button.items():
 	    text_surface = my_font.render(my_text, True, WHITE)
 	    rect = text_surface.get_rect(center=text_pos)
 	    screen.blit(text_surface, rect)
-    
+
     for my_text, text_pos in QUIT_button.items():
 	text_surface = my_font.render(my_text, True, WHITE)
 	rect = text_surface.get_rect(center=text_pos)
 	screen.blit(text_surface, rect)
-        
+
     my_textL1 = left[0] + "  " + str(left[1])
     text_surface = my_font.render(my_textL1, True, WHITE)
     rect = text_surface.get_rect(center=[50, 50])
     screen.blit(text_surface, rect)
-    
+
     my_textL2 = left[2] + "  " + str(left[3])
     text_surface = my_font.render(my_textL2, True, WHITE)
     rect = text_surface.get_rect(center=[50, 100])
     screen.blit(text_surface, rect)
-    
+
     my_textL3 = left[4] + "  " + str(left[5])
     text_surface = my_font.render(my_textL3, True, WHITE)
     rect = text_surface.get_rect(center=[50, 150])
     screen.blit(text_surface, rect)
-    
+
     my_textR1 = right[0] + "  " + str(right[1])
     text_surface = my_font.render(my_textR1, True, WHITE)
     rect = text_surface.get_rect(center=[250, 50])
     screen.blit(text_surface, rect)
-    
+
     my_textR2 = right[2] + "  " + str(right[3])
     text_surface = my_font.render(my_textR2, True, WHITE)
     rect = text_surface.get_rect(center=[250, 100])
     screen.blit(text_surface, rect)
-    
+
     my_textR3 = right[4] + "  " + str(right[5])
     text_surface = my_font.render(my_textR3, True, WHITE)
     rect = text_surface.get_rect(center=[250, 150])
     screen.blit(text_surface, rect)
-    
+
     pygame.display.update()
-	
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(6, GPIO.IN)	
+GPIO.setup(6, GPIO.IN)
 GPIO.setup(13, GPIO.IN)
 
 GPIO.setup(5, GPIO.OUT)   #servo 0
@@ -172,53 +171,53 @@ pygame.display.update()
 run = True
 presssed = 0;
 
-while run: 
+while run:
     print_button(presssed)
-    
+
     time.sleep(.3)
-        
+
     if ( not GPIO.input(17) ):
-        print ("Left servo Clock-wise.") 
+        print ("Left servo Clock-wise.")
         changeServo (0, 1)
         moveTerms(left)
         left[0] = 'CCW'
         left[1] = int(time.time() - timeVal)
 	print_button(presssed)
-        
+
     elif ( not GPIO.input(22) ):
-        print ("Left servo Counter-Clock-wise.") 
+        print ("Left servo Counter-Clock-wise.")
         changeServo (0, -1)
         moveTerms(left)
         left[0] = 'CW'
         left[1] = int(time.time() - timeVal)
 	print_button(presssed)
-        
+
     elif ( not GPIO.input(23) ):
-        print ("Right servo Clock-wise.") 
+        print ("Right servo Clock-wise.")
         changeServo (1, 1)
         moveTerms(right)
         right[0] = 'CCW'
         right[1] = int(time.time() - timeVal)
 	print_button(presssed)
-        
+
     elif ( not GPIO.input(27) ):
-        print ("Right servo Counter-Clock-wise.") 
+        print ("Right servo Counter-Clock-wise.")
         changeServo (1, -1)
         moveTerms(right)
         right[0] = 'CW'
         right[1] = int(time.time() - timeVal)
 	print_button(presssed)
-        
+
 #    elif ( not GPIO.input(13) ):
-#       print ("Left servo stop.") 
+#       print ("Left servo stop.")
 #        changeServo (0, 0)
 #        moveTerms(left)
 #~        left[0] = 'Stop'
 #        left[1] = int(time.time() - timeVal)
 #	print_button(presssed)
-#        
+#
 #    elif ( not GPIO.input(6) ):
-#        print ("Right servo stop.") 
+#        print ("Right servo stop.")
 #        changeServo (1, 0)
 #        moveTerms(right)
 #        right[0] = 'Stop'
@@ -234,12 +233,12 @@ while run:
 		run = 0
             #~ text_surface = my_font.render(my_text, True, WHITE)
             #~ print 'Position at ',pos
-	    
-	    #~ Check distance from center 
+
+	    #~ Check distance from center
 	    distance = pow(pow(abs(x-160),2) + pow(abs(y-120),2),0.5)
             if (distance < 40):
 		screen.fill(BLACK) # Erase the Work space
-                presssed = ~presssed; 
+                presssed = ~presssed;
                 #draw the circle
 		pygame.draw.circle(screen,color(presssed),(160,120),40)
 		func_stop()
